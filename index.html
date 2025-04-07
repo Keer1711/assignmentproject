@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Book & Dean Street Detection</title>
+    <title>AR Book & Pontio Location Detection</title>
 
-    <!-- A-Frame library for building 3D scenes -->
+    <!-- Load A-Frame library -->
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 
-    <!-- AR.js for marker and GPS AR support -->
+    <!-- Load AR.js for marker and GPS AR -->
     <script src="https://rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
-    <!-- Start of the AR scene -->
+
+    <!-- AR scene -->
     <a-scene embedded arjs>
 
-        <!-- Marker-based AR: Detect a custom marker and show a blue box -->
+        <!-- Marker-based AR: shows a blue box when detecting a custom marker -->
         <a-marker preset="custom" type="pattern" url="book-marker.patt">
             <a-entity geometry="primitive: box" material="color: blue" position="0 0.5 0"></a-entity>
         </a-marker>
 
-        <!-- GPS-based AR: Show a red box at Dean Street, Bangor -->
-        <a-entity gps-entity-place="latitude: 53.230114; longitude: -4.125158">
+        <!-- GPS-based AR: shows a red box at Pontio, Bangor -->
+        <a-entity gps-entity-place="latitude: 53.2274; longitude: -4.1293">
             <a-box position="0 0 0" material="color: red"></a-box>
         </a-entity>
 
-        <!-- AR Camera with GPS and rotation tracking -->
+        <!-- AR camera setup with GPS and rotation tracking -->
         <a-camera gps-camera rotation-reader></a-camera>
 
     </a-scene>
 
-    <!-- JavaScript to get user's current location (for debugging/logging) -->
+    <!-- JS to get and log current user location -->
     <script>
         navigator.geolocation.getCurrentPosition(position => {
             console.log("User Location:", position.coords.latitude, position.coords.longitude);
         });
     </script>
+
 </body>
 </html>
