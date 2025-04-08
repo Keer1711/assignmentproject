@@ -6,12 +6,12 @@
     <title>AR Book & Pontio Location Detection</title>
 
     <!-- Load A-Frame library -->
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 
     <!-- Load AR.js for marker and GPS AR -->
-    <script src="https://rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
-<body style="margin: 0; overflow: hidden;">
+<body style="margin: 0; overflow: hidden;"> 
 
     <!-- AR scene -->
     <a-scene embedded arjs>
@@ -33,9 +33,15 @@
 
     <!-- JS to get and log current user location -->
     <script>
-        navigator.geolocation.getCurrentPosition(position => {
-            console.log("User Location:", position.coords.latitude, position.coords.longitude);
-        });
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                console.log("User Location:", position.coords.latitude, position.coords.longitude);
+            }, error => {
+                console.error("Geolocation error:", error);
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
     </script>
 
 </body>
