@@ -1,48 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Book & Pontio Location Detection</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pontio AR Demo</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@1.0.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  </head>
 
-    <!-- Load A-Frame library -->
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    >
+      <a-camera gps-camera rotation-reader></a-camera>
 
-    <!-- Load AR.js for marker and GPS AR -->
-    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin: 0; overflow: hidden;"> 
-
-    <!-- AR scene -->
-    <a-scene embedded arjs>
-
-        <!-- Marker-based AR: shows a blue box when detecting a custom marker -->
-        <a-marker preset="custom" type="pattern" url="book-marker.patt">
-            <a-entity geometry="primitive: box" material="color: blue" position="0 0.5 0"></a-entity>
-        </a-marker>
-
-        <!-- GPS-based AR: shows a red box at Pontio, Bangor -->
-        <a-entity gps-entity-place="latitude: 53.2274; longitude: -4.1293">
-            <a-box position="0 0 0" material="color: red"></a-box>
-        </a-entity>
-
-        <!-- AR camera setup with GPS and rotation tracking -->
-        <a-camera gps-camera rotation-reader></a-camera>
-
+      <!-- Main Text in the center -->
+      <a-entity
+        id="centered-text"
+        position="0 0 -3"
+        scale="3 3 3"
+      >
+        <a-text
+          value="This is Pontio"
+          look-at="[gps-camera]"
+          scale="3 3 3"
+          position="0 0 0"
+        ></a-text>
+      </a-entity>
     </a-scene>
-
-    <!-- JS to get and log current user location -->
-    <script>
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                console.log("User Location:", position.coords.latitude, position.coords.longitude);
-            }, error => {
-                console.error("Geolocation error:", error);
-            });
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-    </script>
-
-</body>
+  </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
