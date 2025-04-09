@@ -16,6 +16,13 @@
       arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
     >
       <a-camera gps-camera rotation-reader></a-camera>
+      <a-scene>
+        <a-assets>
+          <a-asset-item id="tree" src="/models/scene.gltf"></a-asset-item>
+        </a-assets>
+        <!-- Position the tree model slightly in front of the marker -->
+        <a-entity position="0 0 0" gltf-model="#tree" scale="0.5 0.5 0.5"></a-entity>
+      </a-scene>
 
       <!-- Main Text in the center -->
       <a-entity
